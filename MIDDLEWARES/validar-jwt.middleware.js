@@ -2,9 +2,13 @@ const jwt = require('jsonwebtoken')
 
 const Usuario = require('../MODELS/usuario.model')
 
-const ValidarJWT = (req,res,next)=>{
+const Variable = require('../MODELS/variables.model');
+
+const ValidarJWT = async (req,res,next)=>{
 
     const token = req.header('x-token');
+
+    const variable =  await Variable.findOne({cnomvar:'cestsis'})
 
     if(!token){
         return res.status(404).json({
@@ -14,9 +18,39 @@ const ValidarJWT = (req,res,next)=>{
     }
 
     try {
+
+        
         const { uid }  = jwt.verify(token,process.env.JWT_SECRET); 
         req.uid = uid;
-        next();
+        
+
+        const catego = await Usuario.findById(uid)
+
+
+
+        if(variable.cconvar === 'true' ){
+            req.UsuarioToken = catego
+            next();
+
+        }
+        else {
+            if(catego.ccodcat === 'ADM'){
+                req.UsuarioToken = catego
+                next();
+
+            }else{
+                console.log(__dirname);
+                res.status(500).json({
+                    ok:false,
+                    msg:'El sistema esta deshabilitado',
+                    metodo:'MIDDLEWARES/validar-jwt-middleware/ValidarJWT'
+                }) 
+            }
+
+            
+        }
+
+
         
         
     } catch (error) {

@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "61f84d680d545bd7cff4737f"
+  },
+  "ctiptic": "Help Desk 10",
+  "cnompro": {
+    "$oid": "61f80e3b3e611ac112e6af9d"
+  },
+  "cdesasu": "Correccion del modulo de registro de clientes",
+  "cdescri": "Se detecto un bug donde se registra dos veces al cliente en el modulo de mantenimiento",
+  "cpriori": "Alta",
+  "cestado": "registrado",
+  "carcadj": "archivo.pdf",
+  "cdesate": "",
+  "cdesdes": "",
+  "cestdev": false,
+  "cusureg": {
+    "$oid": "61f806c03dc00629d3319d04"
+  },
+  "dfecreg": "2022-01-31 03:58:11",
+  "cusumod": {
+    "$oid": "61f806c03dc00629d3319d04"
+  },
+  "dfecmod": "2022-01-31 03:58:11",
+  "__v": 0
+}]

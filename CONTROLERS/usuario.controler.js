@@ -7,19 +7,40 @@ const moment = require('moment')
 const Usuario = require('../MODELS/usuario.model');
 const { generarJWT } = require('../HELPERS/jwt.helper');
 
+const {validarPermisos} = require('../HELPERS/permisos.helper');
+
+let valorFormulario = 'usuarios'
+
 const crearUsuario = async(req,res=response) =>{
+
+
 
     let currentDate = moment().format('YYYY-MM-DD')
 
     let currentTime = moment().format('hh:mm:ss')
+
+    
+
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/usuario.controler.js/crearUsuarios'
+        }) 
+    }
+
     try {
-        console.log(req.body);
+        
         
         const { ccorusu,
+                cnudoci,
                 cnomusu,
+                capeusu,
                 cpaswor,
                 cestusu,
-                ccatego,
+                ccodcat,
                 nnumint,
                 cdirusu,
                 csexusu,
@@ -40,10 +61,12 @@ const crearUsuario = async(req,res=response) =>{
       
         const usuarioNuevo = new Usuario({  
                                 ccorusu:ccorusu,
+                                cnudoci:cnudoci,
                                 cnomusu:cnomusu,
+                                capeusu:capeusu,
                                 cpaswor:cpaswor,
                                 cestusu:cestusu,
-                                ccatego:ccatego,
+                                ccodcat:ccodcat,
                                 nnumint:nnumint,
                                 cdirusu:cdirusu,
                                 csexusu:csexusu,
@@ -68,6 +91,7 @@ const crearUsuario = async(req,res=response) =>{
             ok:true,
             msg:'Se creo el usuario correctamente',
             obj:usuarioNuevo,
+            per,
             token,
             metodo:'CONTROLERS/usuario.controler.js/crearUsuarios'
         }) 
@@ -87,6 +111,15 @@ const crearUsuario = async(req,res=response) =>{
 
 const actualizarUsuario = async(req,res=response) =>{
 
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/usuario.controler.js/actualizarUsuario'
+        }) 
+    }
 
     try {
 

@@ -1,0 +1,134 @@
+[{
+  "_id": {
+    "$oid": "61f80e3b3e611ac112e6af9d"
+  },
+  "cnompro": "Facturacion electronica",
+  "ccodcli": {
+    "$oid": "61f806c03dc00629d3319d04"
+  },
+  "cdescri": "Desarrollo e implementacion de facturacion Electronica",
+  "cestado": true,
+  "cusureg": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecreg": "2022-01-31 11:28:41",
+  "cusumod": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecmod": "2022-01-31 11:45:59",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f8127b2f9d47fbc7bcfc84"
+  },
+  "cnompro": "Help Desk",
+  "ccodcli": {
+    "$oid": "61f806c03dc00629d3319d04"
+  },
+  "cdescri": "Desarrollo de Help Desk",
+  "cestado": true,
+  "cusureg": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecreg": "2022-01-31 11:45:59",
+  "cusumod": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecmod": "2022-01-31 11:45:59",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f8128e2f9d47fbc7bcfc89"
+  },
+  "cnompro": "Help Desk 1",
+  "ccodcli": {
+    "$oid": "61f806c03dc00629d3319d04"
+  },
+  "cdescri": "Desarrollo de Help Desk",
+  "cestado": true,
+  "cusureg": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecreg": "2022-01-31 11:45:59",
+  "cusumod": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecmod": "2022-01-31 11:45:59",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f812912f9d47fbc7bcfc8e"
+  },
+  "cnompro": "Help Desk 2",
+  "ccodcli": {
+    "$oid": "61f806c03dc00629d3319d04"
+  },
+  "cdescri": "Desarrollo de Help Desk",
+  "cestado": true,
+  "cusureg": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecreg": "2022-01-31 11:45:59",
+  "cusumod": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecmod": "2022-01-31 11:45:59",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f812942f9d47fbc7bcfc93"
+  },
+  "cnompro": "Help Desk 3",
+  "ccodcli": {
+    "$oid": "61f806c03dc00629d3319d04"
+  },
+  "cdescri": "Desarrollo de Help Desk",
+  "cestado": true,
+  "cusureg": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecreg": "2022-01-31 11:45:59",
+  "cusumod": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecmod": "2022-01-31 11:45:59",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f812992f9d47fbc7bcfc98"
+  },
+  "cnompro": "Help Desk 7",
+  "ccodcli": {
+    "$oid": "61f806c03dc00629d3319d04"
+  },
+  "cdescri": "Desarrollo de Help Desk",
+  "cestado": true,
+  "cusureg": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecreg": "2022-01-31 11:45:59",
+  "cusumod": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecmod": "2022-01-31 11:45:59",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f8129c2f9d47fbc7bcfc9d"
+  },
+  "cnompro": "Help Desk 10",
+  "ccodcli": {
+    "$oid": "61f806c03dc00629d3319d04"
+  },
+  "cdescri": "Desarrollo de Help Desk",
+  "cestado": true,
+  "cusureg": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecreg": "2022-01-31 11:45:59",
+  "cusumod": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "dfecmod": "2022-01-31 11:45:59",
+  "__v": 0
+}]

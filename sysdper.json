@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "61a925b5cd4a606fc0661352"
+  },
+  "ctipcat": "USU",
+  "URL": "perfil",
+  "ctitle": "perfil",
+  "csection": "CONFIGURACION",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a925bacd4a606fc0661354"
+  },
+  "ctipcat": "ADM",
+  "URL": "usuarios",
+  "ctitle": "usuarios",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a925becd4a606fc0661356"
+  },
+  "ctipcat": "ADM",
+  "URL": "perfil",
+  "ctitle": "perfil",
+  "csection": "CONFIGURACION",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a9625664bba82adbfd462d"
+  },
+  "ctipcat": "ADM",
+  "URL": "variables",
+  "ctitle": "variables",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+}]

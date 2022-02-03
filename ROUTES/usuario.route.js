@@ -5,9 +5,6 @@
 */
 
 const { Router } = require('express');
-const { recuparContrasena } = require('../CONTROLERS/auth.controler');
-
-
 
 const { actualizarUsuario,
         crearUsuario } = require('../CONTROLERS/usuario.controler');

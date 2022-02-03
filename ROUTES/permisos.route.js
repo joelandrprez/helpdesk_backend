@@ -16,7 +16,7 @@ const router = Router();
 router.post('/', [
                     ValidarJWT
                 ], crearPermiso);
-router.post('/per/:id', [
+router.post('/per', [
                     ValidarJWT
                 ], mostrarPermisos);                
 

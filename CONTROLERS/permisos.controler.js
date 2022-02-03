@@ -1,12 +1,28 @@
 const { request,response } = require('express')
 const bcrypt = require('bcryptjs');
-const mongoose = require('mongoose');
 const moment = require('moment')
 
 const Permiso = require('../MODELS/permisos.model');
+const { validarPermisos } = require('../HELPERS/permisos.helper');
+
+let valorFormulario = 'usuarios'
 
 const crearPermiso = async(req,res=response) => {
+
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/permiso.controler.js/crearPermiso'
+        }) 
+    }
+
     try {
+
+        console.log();
+
         const { ctipcat,
                 URL,
                 ctitle,
@@ -81,7 +97,8 @@ const mostrarPermisosOriginal = async(req,res=response) =>{
 const mostrarPermisos = async(req,res=response) =>{
     try {
 
-        const categoria = req.params.id;
+        
+        const categoria = req.UsuarioToken.ccodcat;
         // MyModel.distinct('_id', { foo: 'bar' },
         
         const permiso = await Permiso.find({ctipcat:categoria})
@@ -99,7 +116,7 @@ const mostrarPermisos = async(req,res=response) =>{
 
                     menu.push({url:permiso[e].URL})
 
-                    console.log(permiso[e].URL);
+                    // console.log(permiso[e].URL);
 
                 }
             }

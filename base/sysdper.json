@@ -1,0 +1,154 @@
+[{
+  "_id": {
+    "$oid": "61a925b5cd4a606fc0661352"
+  },
+  "ctipcat": "CLI",
+  "URL": "perfil",
+  "ctitle": "Perfil",
+  "csection": "CONFIGURACION",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a925bacd4a606fc0661354"
+  },
+  "ctipcat": "ADM",
+  "URL": "usuarios",
+  "ctitle": "Usuarios",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a925becd4a606fc0661356"
+  },
+  "ctipcat": "ADM",
+  "URL": "perfil",
+  "ctitle": "Perfil",
+  "csection": "CONFIGURACION",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a9625664bba82adbfd462d"
+  },
+  "ctipcat": "ADM",
+  "URL": "variables",
+  "ctitle": "Variables",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f33073d3d77438a687b7f5"
+  },
+  "ctipcat": "CLI",
+  "URL": "tickets",
+  "ctitle": "Tickets",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f333e5d3d77438a687b7fc"
+  },
+  "ctipcat": "ATE",
+  "URL": "perfil",
+  "ctitle": "Perfil",
+  "csection": "CONFIGURACION",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f333f6d3d77438a687b7fd"
+  },
+  "ctipcat": "ATE",
+  "URL": "tickets",
+  "ctitle": "Tickets",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f3345dd3d77438a687b7fe"
+  },
+  "ctipcat": "ATE",
+  "URL": "historialnotificaciones",
+  "ctitle": "Historial de Notificaciones",
+  "csection": "NOTIFICACIONES",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f33478d3d77438a687b7ff"
+  },
+  "ctipcat": "CLI",
+  "URL": "historialnotificaciones",
+  "ctitle": "Historial de Notificaciones",
+  "csection": "NOTIFICACIONES",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f3382dd3d77438a687b804"
+  },
+  "ctipcat": "DES",
+  "URL": "perfil",
+  "ctitle": "Perfil",
+  "csection": "CONFIGURACION",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f33941d3d77438a687b805"
+  },
+  "ctipcat": "DES",
+  "URL": "ticketsasignados",
+  "ctitle": "Tickets Asignados",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f33c7fd3d77438a687b806"
+  },
+  "ctipcat": "DES",
+  "URL": "historialnotificaciones",
+  "ctitle": "Historial de Notificaciones",
+  "csection": "NOTIFICACIONES",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f33ee7d3d77438a687b80c"
+  },
+  "ctipcat": "ADM",
+  "URL": "historialnotificaciones",
+  "ctitle": "Historial de Notificaciones",
+  "csection": "NOTIFICACIONES",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f33fb9d3d77438a687b811"
+  },
+  "ctipcat": "ADM",
+  "URL": "tickets",
+  "ctitle": "Tickets",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f40b080cd4bb340d822307"
+  },
+  "ctipcat": "ADM",
+  "URL": "proyectos",
+  "ctitle": "Proyectos",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fbd38613e7a2a336b24670"
+  },
+  "ctipcat": "ATE",
+  "URL": "asignacionticket",
+  "ctitle": "Asignacion de Ticket",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fbd39013e7a2a336b24671"
+  },
+  "ctipcat": "ADM",
+  "URL": "asignacionticket",
+  "ctitle": "Asignacion de Ticket",
+  "csection": "MANTENIMIENTO",
+  "__v": 0
+}]

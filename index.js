@@ -19,11 +19,14 @@ const app = express();
 const {dbConnection} = require('./DB/config')
 
 //limita el acceso 
-app.use(cors())
+app.use(cors());
+
+app.options('*',cors())
 //parse a JSON
 app.use(express.json());
 //coneccion a laa base mongo
 dbConnection();
+
 
 
 app.use('/api/usuarios',require('./ROUTES/usuario.route'));
@@ -32,10 +35,16 @@ app.use('/api/login',require('./ROUTES/auth.route'));
 
 app.use('/api/permisos',require('./ROUTES/permisos.route'));
 
-//limita el acceso 
-app.use(cors())
-//parse a JSON
-app.use(express.json());
+app.use('/api/variable',require('./ROUTES/variable.route'));
+
+app.use('/api/perfil',require('./ROUTES/perfil.route'));
+
+app.use('/api/proyecto',require('./ROUTES/proyecto.route'));
+
+app.use('/api/ticket',require('./ROUTES/ticket.route'));
+
+app.use('/api/notificaciones',require('./ROUTES/notificaciones.route'));
+
 
 app.listen(process.env.PORT,()=>{
     console.log('SERVIDO ON');

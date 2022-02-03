@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "61b6a375a57a5a28fa481a12"
+  },
+  "cconvar": "jperez021719@gmail.com",
+  "cnomvar": "cmail",
+  "cdesvar": "CORREO DE ENVIO DE CORREOS DE RECUPERACION",
+  "ctipvar": "S",
+  "cusumod": {
+    "$oid": "61a64f7face7d676323a0535"
+  },
+  "dfecmod": "2021-12-12 08:35:49",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61b6a38fa57a5a28fa481a15"
+  },
+  "cconvar": "true",
+  "cnomvar": "cestsis",
+  "cdesvar": "ESTADO DEL SISTEMA ACTIVO",
+  "ctipvar": "B",
+  "cusumod": {
+    "$oid": "61a64f7face7d676323a0535"
+  },
+  "dfecmod": "2021-12-12 10:44:13",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61b6c5dea4597d97b202217e"
+  },
+  "cconvar": "4",
+  "cnomvar": "cnumint",
+  "cdesvar": "CANTIDAD DE INTENTOS ANTES DEL BLOQUE",
+  "ctipvar": "N",
+  "cusumod": {
+    "$oid": "61a64f7face7d676323a0535"
+  },
+  "dfecmod": "2021-12-12 11:02:17",
+  "__v": 0
+}]

@@ -8,6 +8,14 @@ const UsuarioSchema = Schema({
     },
     cnomusu:{
         type:String,
+        
+    },
+    capeusu:{
+        type:String,
+        
+    },
+    cnudoci:{
+        type:String,
         require:true
     },
     cpaswor:{

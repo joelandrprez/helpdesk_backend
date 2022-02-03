@@ -1,0 +1,99 @@
+[{
+  "_id": {
+    "$oid": "61bd32421412d2bfe804134a"
+  },
+  "ccorusu": "joanpeq@gmail.com",
+  "cnomusu": "JOEL PEREZ",
+  "cpaswor": "$2a$10$zaddxjheYP2h1tNkWmKBzug14Q.kgBVIIUAinnyV6dVSQumGFJ9zS",
+  "cestusu": true,
+  "ccodcat": "ADM",
+  "nnumint": 0,
+  "cdirusu": "Calle Felipe Pardo 300",
+  "csexusu": "H",
+  "dfecnac": "1993-03-13",
+  "nimgusu": "no-imagen.jpg",
+  "cusureg": {
+    "$oid": "615a04c69d2b43abf1fc9ef8"
+  },
+  "dfecreg": "2021-12-17 07:58:42",
+  "cusumod": {
+    "$oid": "615a04c69d2b43abf1fc9ef8"
+  },
+  "dfecmod": "2021-12-17 07:58:42",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f8066a3dc00629d3319cf4"
+  },
+  "ccorusu": "desarrollador@gmail.com",
+  "cnudoci": "48171371",
+  "cnomusu": "desarrollador",
+  "capeusu": "",
+  "cpaswor": "$2a$10$/t4OJ7ZOb84KUC0WmDFrJe2Mvpr1TDD7bzM.XvODmp3Kyl.3P4Oca",
+  "cestusu": true,
+  "ccodcat": "DES",
+  "nnumint": 0,
+  "cdirusu": "Calle Felipe Pardo 300",
+  "csexusu": "H",
+  "dfecnac": "1993-03-13",
+  "nimgusu": "no-imagen.jpg",
+  "cusureg": {
+    "$oid": "615a04c69d2b43abf1fc9ef8"
+  },
+  "dfecreg": "2022-01-31 10:55:22",
+  "cusumod": {
+    "$oid": "615a04c69d2b43abf1fc9ef8"
+  },
+  "dfecmod": "2022-01-31 10:55:22",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f806a33dc00629d3319cfe"
+  },
+  "ccorusu": "atencioncliente@gmail.com",
+  "cnudoci": "48171371",
+  "cnomusu": "atencioncliente",
+  "capeusu": "1",
+  "cpaswor": "$2a$10$V6WySUuNUxlmJSgt/zL1LuustDZi/OHFYbeb9o7WuY/M8geK.btxS",
+  "cestusu": true,
+  "ccodcat": "ATE",
+  "nnumint": 0,
+  "cdirusu": "Calle Felipe Pardo 300",
+  "csexusu": "H",
+  "dfecnac": "1993-03-13",
+  "nimgusu": "no-imagen.jpg",
+  "cusureg": {
+    "$oid": "615a04c69d2b43abf1fc9ef8"
+  },
+  "dfecreg": "2022-01-31 10:56:19",
+  "cusumod": {
+    "$oid": "615a04c69d2b43abf1fc9ef8"
+  },
+  "dfecmod": "2022-01-31 10:56:19",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f806c03dc00629d3319d04"
+  },
+  "ccorusu": "perfilcliente@gmail.com",
+  "cnudoci": "48171371",
+  "cnomusu": "perfilcliente",
+  "capeusu": "1",
+  "cpaswor": "$2a$10$fmJNOsRkbbwwBDqxF1jFyOZ5mXOTLnh7wDBpIyM1DAAj85TR24Otm",
+  "cestusu": true,
+  "ccodcat": "CLI",
+  "nnumint": 0,
+  "cdirusu": "Calle Felipe Pardo 300",
+  "csexusu": "H",
+  "dfecnac": "1993-03-13",
+  "nimgusu": "no-imagen.jpg",
+  "cusureg": {
+    "$oid": "615a04c69d2b43abf1fc9ef8"
+  },
+  "dfecreg": "2022-01-31 10:56:48",
+  "cusumod": {
+    "$oid": "615a04c69d2b43abf1fc9ef8"
+  },
+  "dfecmod": "2022-01-31 10:56:48",
+  "__v": 0
+}]

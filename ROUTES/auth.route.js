@@ -31,6 +31,7 @@ router.post('/generarTokenRecuperacion', [
 router.post('/restaurarContrasena',[
                                     ValidarJWT], 
                                     recuparContrasena);
+                          
 
 
 module.exports = router

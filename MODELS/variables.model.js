@@ -4,13 +4,14 @@ const {Schema,model, now} = require('mongoose');
 
 const variablesSchema = Schema({
 
-    cestado:{
-        type:String,
-        require:true
-    },
     cconvar:{
         type:String,
         require:true
+    },
+    cnomvar:{
+        type:String,
+        require:true,
+        unique:true
     },
     cdesvar:{
         type:String,
