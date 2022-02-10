@@ -12,7 +12,9 @@ let currentDate = moment().format('YYYY-MM-DD')
     
 let currentTime = moment().format('hh:mm:ss')
 
-let valorFormulario = 'variables'
+let valorFormulario = 'Variables'
+
+let valorFormulari1 = 'Tickets'
 
 const crearVariable = async(req,res=response) => {
     
@@ -160,9 +162,11 @@ const traerListaVariables = async(req,res=response) => {
         }      
         const uidToken = req.uid;
 
-
+        const desde = Number(req.query.inicio)|| 0 ;// manda como ?
         const [variables,total] = await Promise.all([
-            Variable.find({}),
+            Variable.find({})
+            .skip(desde)
+            .limit(5),
             Variable.countDocuments()
         ])
         
@@ -187,9 +191,50 @@ const traerListaVariables = async(req,res=response) => {
     }
 }
 
+const traerPrioridad = async (req,res=response) => {
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulari1);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/usuario.controler.js/traerPrioridad'
+        }) 
+    }
+
+    try {
+
+        const fecha_registro = currentDate+' '+currentTime
+
+        const [prioridad,tipo] = await Promise.all([
+            Variable.find({cnomvar:'cpriori'}),
+            Variable.find({cnomvar:'cinctip'})
+        ])
+        res.status(200).json({
+            ok:true,
+            prioridad,
+            tipo,
+            msg:'la operacion se ejecuto correctamente',
+            metodo:'CONTROLERS/variables.controler.js/traerPrioridad'
+        })  
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Se produjo un error contacte al administrador',
+            metodo:'CONTROLERS/variables.controler.js/traerPrioridad'
+        }) 
+    }
+}
+
+
 
 module.exports = {
     crearVariable,
     actualizarVariable,
-    traerListaVariables
+    traerListaVariables,
+    traerPrioridad
+    
 }

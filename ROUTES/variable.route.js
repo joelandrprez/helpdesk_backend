@@ -6,7 +6,7 @@
 
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { crearVariable,actualizarVariable, traerListaVariables } = require('../CONTROLERS/variables.controler');
+const { crearVariable,actualizarVariable, traerListaVariables,traerPrioridad } = require('../CONTROLERS/variables.controler');
 
 const { validarCampos } = require('../MIDDLEWARES/validar-campos.middleware');
 const { ValidarJWT } = require('../MIDDLEWARES/validar-jwt.middleware');
@@ -25,6 +25,10 @@ router.put('/:id',
 
 router.get('/', 
                         [ValidarJWT], 
-                        traerListaVariables);                               
+                        traerListaVariables);   
+
+router.get('/prioridad', 
+                        [ValidarJWT], 
+                        traerPrioridad);  
 
 module.exports = router

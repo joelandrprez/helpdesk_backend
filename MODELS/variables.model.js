@@ -11,7 +11,7 @@ const variablesSchema = Schema({
     cnomvar:{
         type:String,
         require:true,
-        unique:true
+        
     },
     cdesvar:{
         type:String,

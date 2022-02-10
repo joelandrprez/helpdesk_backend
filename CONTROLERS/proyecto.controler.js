@@ -9,7 +9,7 @@ let currentDate = moment().format('YYYY-MM-DD')
     
 let currentTime = moment().format('hh:mm:ss')
 
-let valorFormulario = 'proyectos'
+let valorFormulario = 'Proyectos'
 
 const crearProyecto = async(req,res=response) => {
 
@@ -140,8 +140,8 @@ const listadoProyectos = async(req,res=response) => {
         const [proyectos,total] = await Promise.all([
             Proyecto.find({},'cnompro ccodcli cdescri cestado')
                     .skip(desde)
-                    .limit(5),
-                    
+                    .limit(5)
+                    .populate('ccodcli','cnomusu'),
             Proyecto.countDocuments()
           
         ])

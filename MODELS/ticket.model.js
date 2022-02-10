@@ -5,8 +5,8 @@ const {Schema,model, now} = require('mongoose');
 const ticketSchema = Schema({
 
     ctiptic:{
-        type:String,
-        require:true
+        type:Schema.Types.ObjectId,
+        ref:'systvar'
     },
     cnompro:{
         type:Schema.Types.ObjectId,
@@ -21,8 +21,8 @@ const ticketSchema = Schema({
         require:true
     },
     cpriori:{
-        type:String,
-        ref:'systusu'
+        type:Schema.Types.ObjectId,
+        ref:'systvar'
     },
     cestado:{
         type: String,

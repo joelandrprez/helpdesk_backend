@@ -45,6 +45,8 @@ app.use('/api/ticket',require('./ROUTES/ticket.route'));
 
 app.use('/api/notificaciones',require('./ROUTES/notificaciones.route'));
 
+app.use('/api/upload',require('./ROUTES/upload.route'));
+
 
 app.listen(process.env.PORT,()=>{
     console.log('SERVIDO ON');
