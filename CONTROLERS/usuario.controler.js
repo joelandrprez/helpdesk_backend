@@ -221,8 +221,55 @@ const actualizarUsuario = async(req,res=response) =>{
 
 }
 
+const listadoUsuarios = async(req,res=response) => {
+
+
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/usuario.controler.js/listadoUsuarios'
+        }) 
+    }
+
+
+    try {
+        const desde = Number(req.query.inicio)|| 0 ;// manda como ?
+
+        const [usuarios,total] = await Promise.all([
+            Usuario.find({},'cnomusu capeusu cdirusu ccorusu cnudoci cestusu ccodcat csexusu dfecreg')
+                    .skip(desde)
+                    .limit(5)
+                    .populate('cnudoci','cnomusu'),
+            Usuario.countDocuments()
+          
+        ])
+
+
+
+        res.status(200).json({
+            ok:true,
+            usuarios,
+            total,
+            msg:'Se actualizo el proyecto correctamente',
+            metodo:'CONTROLERS/usuario.controler.js/listadoUsuarios'
+        })  
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Se produjo un error contacte al administrador',
+            metodo:'CONTROLERS/usuario.controler.js/listadoUsuarios'
+        }) 
+    }
+}
+
 
 module.exports = {
     crearUsuario,
-    actualizarUsuario
+    actualizarUsuario,
+    listadoUsuarios
 }
