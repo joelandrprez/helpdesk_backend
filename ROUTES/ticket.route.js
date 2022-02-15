@@ -14,7 +14,10 @@ const { crearTicket,
         EdicionTicketDesarrollo,
         ListaTicketDesarrollo,
         traerProyectoCLiente,
-        ListaDesarroladores } = require('../CONTROLERS/ticket.controler');
+        ListaDesarroladores, 
+        AnularTicketCliente,
+        ActualizarTicketCliente,
+        Busquedapordescripcion} = require('../CONTROLERS/ticket.controler');
     
 const { ValidarJWT } = require('../MIDDLEWARES/validar-jwt.middleware');
 
@@ -60,7 +63,13 @@ router.get('/ListaDesarroladores',[
             ValidarJWT
             ],ListaDesarroladores);               
             
-        
-            
-            
+router.put('/AnularTicketUsuario/:id',[
+            ValidarJWT
+            ],AnularTicketCliente);         
+router.put('/ActualizarTickerUsuario/:id',[
+            ValidarJWT
+            ],ActualizarTicketCliente);                
+ router.get('/busquedapornombre/:id',[
+                ValidarJWT
+                ],Busquedapordescripcion);      
 module.exports = router

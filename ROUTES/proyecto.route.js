@@ -7,7 +7,7 @@
 const { Router } = require('express');
 
 
-const { crearProyecto,actualizarProyecto,listadoProyectos} = require('../CONTROLERS/proyecto.controler');
+const { crearProyecto,actualizarProyecto,listadoProyectos,buscarProyecto,retornarPDF} = require('../CONTROLERS/proyecto.controler');
     
 const { ValidarJWT } = require('../MIDDLEWARES/validar-jwt.middleware');
 
@@ -25,6 +25,14 @@ router.put('/:id',[
 
 router.get('/',[
             ValidarJWT
-                ],listadoProyectos);                                           
+                ],listadoProyectos);   
+
+router.get('/buscar',[
+            ValidarJWT
+                ],buscarProyecto);  
+router.get('/pdf/:data',[
+            
+                ],retornarPDF);  
+
 
 module.exports = router

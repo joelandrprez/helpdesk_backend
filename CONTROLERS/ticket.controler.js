@@ -90,7 +90,6 @@ const crearTicket = async(req,res=response) => {
     }
 }
 
-
 const traerListaTicketporUsuario = async(req,res=response) => {
 
     
@@ -350,7 +349,7 @@ const traerProyectoCLiente =  async (req,res=response) =>{
         const desde = Number(req.query.inicio)|| 0 ;// manda como ?
 
         const [proyectos] = await Promise.all([
-            Proyectos.find({ccodcli:usuarioToken},'cnompro')  
+            Proyectos.find({ccodcli:usuarioToken,cestado:true},'cnompro')  
         ])
 
 
@@ -411,6 +410,154 @@ const ListaDesarroladores = async (req,res=response) =>{
         }) 
     }
 }
+const AnularTicketCliente = async (req,res=response) =>{
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/ticket.controler.js/AnularTicketCliente'
+        }) 
+    }
+    try {
+        const usuarioToken = req.uid
+        const uidUpdate = req.params.id;
+        
+        const fechaFormateada = currentDate+' '+currentTime
+        const validarEstadoTicket = await Tickect.findById(uidUpdate)
+
+        const campos = { }
+        campos.cestado = 'anulado',
+        campos.cusumod = usuarioToken,
+        campos.dfecmod = fechaFormateada
+
+        if(validarEstadoTicket.cestado==='registrado'){
+            const tickeactualizado = await Tickect.findByIdAndUpdate(uidUpdate,campos,{new:true});
+            res.status(200).json({
+            ok:true,
+            msg:'Se realizaron los cambios ',
+            tickeactualizado,
+            metodo:'CONTROLERS/ticket.controler.js/AnularTicketCliente'
+        })  
+        }else{
+            res.status(200).json({
+                ok:false,
+                msg:'No se puede modificar ese estado ',
+                metodo:'CONTROLERS/ticket.controler.js/AnularTicketCliente'
+            })  
+        }
+        
+
+        
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Se produjo un error contacte al administrador',
+            metodo:'CONTROLERS/ticket.controler.js/AnularTicketCliente'
+        }) 
+    }
+}
+const ActualizarTicketCliente = async (req,res=response) =>{
+
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/ticket.controler.js/AnularTicketCliente'
+        }) 
+    }
+
+    try {
+        const usuarioToken = req.uid
+        const uidUpdate = req.params.id;
+        
+        const fechaFormateada = currentDate+' '+currentTime
+        const validarEstadoTicket = await Tickect.findById(uidUpdate)
+        
+        const {...campos} = req.body
+
+        campos.cusumod = usuarioToken,
+        campos.dfecmod = fechaFormateada
+
+        if(validarEstadoTicket.cestado==='registrado'){
+            const tickeactualizado = await Tickect.findByIdAndUpdate(uidUpdate,campos,{new:true});
+            res.status(200).json({
+            ok:true,
+            msg:'Se realizaron los cambios ',
+            tickeactualizado,
+            metodo:'CONTROLERS/ticket.controler.js/ActualizarTicketCliente'
+        })  
+        }else{
+
+        }
+        res.status(200).json({
+            ok:false,
+            msg:'No se puede modificar ese estado ',
+            metodo:'CONTROLERS/ticket.controler.js/ActualizarTicketCliente'
+        })  
+        
+
+        
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Se produjo un error contacte al administrador',
+            metodo:'CONTROLERS/ticket.controler.js/ActualizarTicketCliente'
+        }) 
+    }
+}
+
+const Busquedapordescripcion = async (req,res=response) =>{
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/ticket.controler.js/traerListaTicketporUsuario'
+        }) 
+    }
+    try {
+        const usuarioToken = req.uid
+        const termino = req.params.id
+        const regex = new RegExp(termino,'i');
+        const desde = Number(req.query.inicio)|| 0 ;// manda como ?
+        console.log(termino);
+        const [tickets,nro] = await Promise.all([
+            Tickect.find({cusureg:usuarioToken,cdescri:regex})    
+            .skip(desde)
+            .limit(5)
+            .populate('cnompro','cnompro')
+            .populate('cpriori','cconvar cnomvar cdesvar')
+            .populate('ctiptic','cconvar cnomvar cdesvar'),
+            Tickect.countDocuments({cusureg:usuarioToken,cdescri:regex})      
+        ])
+        res.status(200).json({
+            ok:true,
+            data:tickets,
+            msg:'La operacion se realizo con exito',
+            total:nro,
+            metodo:'CONTROLERS/ticket.controler.js/traerListaTicketporUsuario'
+        })  
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Se produjo un error contacte al administrador',
+            metodo:'CONTROLERS/ticket.controler.js/traerListaTicketporUsuario'
+        }) 
+    }
+}
+
+
 
 
 module.exports = {
@@ -421,5 +568,8 @@ module.exports = {
     EdicionTicketDesarrollo,
     ListaTicketDesarrollo,
     traerProyectoCLiente,
-    ListaDesarroladores
+    ListaDesarroladores,
+    AnularTicketCliente,
+    ActualizarTicketCliente,
+    Busquedapordescripcion
 }
