@@ -266,10 +266,48 @@ const listadoUsuarios = async(req,res=response) => {
         }) 
     }
 }
+const listadoClientes = async(req,res=response) => {
 
+
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/usuario.controler.js/listadoUsuarios'
+        }) 
+    }
+
+
+    try {
+
+        const [usuarios] = await Promise.all([
+            Usuario.find({ccodcat:"CLI"},'cnomusu')          
+        ])
+
+
+
+        res.status(200).json({
+            ok:true,
+            usuarios,
+            msg:'Se actualizo el proyecto correctamente',
+            metodo:'CONTROLERS/usuario.controler.js/listadoUsuarios'
+        })  
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Se produjo un error contacte al administrador',
+            metodo:'CONTROLERS/usuario.controler.js/listadoUsuarios'
+        }) 
+    }
+}
 
 module.exports = {
     crearUsuario,
     actualizarUsuario,
-    listadoUsuarios
+    listadoUsuarios,
+    listadoClientes
 }
