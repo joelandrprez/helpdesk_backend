@@ -24,7 +24,7 @@ app.use(cors());
 
 app.options('*',cors())
 //parse a JSON
-app.use(express.static(path.join(__dirname, 'helpdesk')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 //coneccion a laa base mongo
 dbConnection();
