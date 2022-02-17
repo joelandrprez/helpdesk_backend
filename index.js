@@ -13,6 +13,7 @@ npm npm install --save-dev nodemon
 
 
 const express = require('express');
+const path = require('path');
 require('dotenv').config();
 const cors = require('cors')
 const app = express();
@@ -23,6 +24,7 @@ app.use(cors());
 
 app.options('*',cors())
 //parse a JSON
+app.use(express.static(path.join(__dirname, 'helpdesk')));
 app.use(express.json());
 //coneccion a laa base mongo
 dbConnection();
