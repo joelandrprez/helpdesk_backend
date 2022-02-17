@@ -24,12 +24,12 @@ app.use(cors());
 
 app.options('*',cors())
 //parse a JSON
-app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(express.json());
 //coneccion a laa base mongo
 dbConnection();
 
-
+app.use(express.static('public'))
 
 app.use('/api/usuarios',require('./ROUTES/usuario.route'));
 
@@ -48,6 +48,10 @@ app.use('/api/ticket',require('./ROUTES/ticket.route'));
 app.use('/api/notificaciones',require('./ROUTES/notificaciones.route'));
 
 app.use('/api/upload',require('./ROUTES/upload.route'));
+
+app.get('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'public/index.html'))
+})
 
 
 app.listen(process.env.PORT,()=>{
