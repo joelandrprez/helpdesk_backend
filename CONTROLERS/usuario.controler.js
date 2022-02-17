@@ -283,7 +283,7 @@ const listadoClientes = async(req,res=response) => {
     try {
 
         const [usuarios] = await Promise.all([
-            Usuario.find({ccodcat:"CLI"},'cnomusu')          
+            Usuario.find({cestado:true},'cnomusu')          
         ])
 
 

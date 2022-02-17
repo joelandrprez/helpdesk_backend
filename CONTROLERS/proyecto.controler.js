@@ -191,7 +191,7 @@ const buscarProyecto = async(req,res=response) => {
         ])
 
 
-
+        
         res.status(200).json({
             ok:true,
             proyectos,

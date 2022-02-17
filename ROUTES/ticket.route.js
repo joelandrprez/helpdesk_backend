@@ -17,7 +17,9 @@ const { crearTicket,
         ListaDesarroladores, 
         AnularTicketCliente,
         ActualizarTicketCliente,
-        Busquedapordescripcion} = require('../CONTROLERS/ticket.controler');
+        Busquedapordescripcion,
+        MuestraTicketGeneral,
+        FinalizarTicket} = require('../CONTROLERS/ticket.controler');
     
 const { ValidarJWT } = require('../MIDDLEWARES/validar-jwt.middleware');
 
@@ -69,7 +71,16 @@ router.put('/AnularTicketUsuario/:id',[
 router.put('/ActualizarTickerUsuario/:id',[
             ValidarJWT
             ],ActualizarTicketCliente);                
- router.get('/busquedapornombre/:id',[
+router.get('/busquedapornombre/:id',[
                 ValidarJWT
                 ],Busquedapordescripcion);      
+
+router.get('/muestraTicketGeneral',[
+                ValidarJWT
+                ],MuestraTicketGeneral);  
+
+router.put('/finticketresuelto/:id',[
+                ValidarJWT
+                ],FinalizarTicket);                 
+                
 module.exports = router

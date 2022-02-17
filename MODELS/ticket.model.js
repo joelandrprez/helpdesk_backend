@@ -40,9 +40,20 @@ const ticketSchema = Schema({
         type: String,
         default:''
     },
+    cdesfin:{
+        type: String,
+        default:''
+    },
     cdesasi:{
         type:Schema.Types.ObjectId,
         ref:'systusu'
+    },
+    cateasi:{
+        type:Schema.Types.ObjectId,
+        ref:'systusu'
+    },
+    cdiaapr:{
+        type: String
     },
     cestdev:{
         type:Boolean,

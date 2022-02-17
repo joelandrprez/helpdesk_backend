@@ -17,6 +17,7 @@ let valorFormulario = 'Tickets'
 let valorFormulario1 = 'Asignacion de Ticket'
 let valorFormulario2 = 'Tickets Asignados'
 
+// 'Tickets'
 const crearTicket = async(req,res=response) => {
 
     
@@ -89,7 +90,7 @@ const crearTicket = async(req,res=response) => {
         }) 
     }
 }
-
+// 'Tickets' :muestra la lista de todos los Tickets registrados a los usuarios clientes
 const traerListaTicketporUsuario = async(req,res=response) => {
 
     
@@ -135,7 +136,7 @@ const traerListaTicketporUsuario = async(req,res=response) => {
         }) 
     }
 }
-
+// 'Asignacion de Ticket' : actualiza el ticket asignando a un desarrollador
 const AsignacionTicketAtencionCliente = async(req,res=response) =>{
     const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario1);
 
@@ -153,15 +154,17 @@ const AsignacionTicketAtencionCliente = async(req,res=response) =>{
         const usuarioToken = req.uid
         const uidUpdate = req.params.id;
         const campos = {}
-        const { cestado,cdesasi,cdesate,cestdev } = req.body;
+        const { cestado,cdesasi,cdesate,cestdev,cdiaapr } = req.body;
         console.log(cestdev);
         const fechaFormateada = currentDate+' '+currentTime
         campos.cestado = cestado
         campos.cdesasi = cdesasi
         campos.cdesate = cdesate
         campos.cestdev = cestdev
+        campos.cdiaapr = cdiaapr
         campos.cusumod = usuarioToken;
         campos.dfecmod = fechaFormateada;
+        campos.cateasi = usuarioToken;
         if(campos.cestado==='registrado'){
             campos.cestdev = true
         }
@@ -184,7 +187,7 @@ const AsignacionTicketAtencionCliente = async(req,res=response) =>{
         }) 
     }
 }
-
+// 'Asignacion de Ticket' : muestra la lista de todos los tickets que ya fueron asignados
 const traerListalistaAsginacion = async(req,res=response) =>{
     const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario1);
 
@@ -195,6 +198,7 @@ const traerListalistaAsginacion = async(req,res=response) =>{
             metodo:'CONTROLERS/ticket.controler.js/traerListalistaAsginacion'
         }) 
     }
+
 
 
     try {
@@ -208,7 +212,10 @@ const traerListalistaAsginacion = async(req,res=response) =>{
             .limit(5)
             .populate('cnompro','cnompro')
             .populate('cpriori','cconvar cnomvar cdesvar')
-            .populate('ctiptic','cconvar cnomvar cdesvar'),
+            .populate('cusureg','cnomusu')
+            .populate('ctiptic','cconvar cnomvar cdesvar')
+            .populate('cateasi','cnomusu')
+            .populate('cdesasi','cnomusu'),
             Tickect.countDocuments()      
         ])
 
@@ -230,8 +237,7 @@ const traerListalistaAsginacion = async(req,res=response) =>{
         }) 
     }
 }
-
-
+//'Tickets Asignados' : actualizar el ticket a estado resuelto o pendiente por devolver
 const EdicionTicketDesarrollo = async(req,res=response) =>{
     const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario2);
 
@@ -258,7 +264,7 @@ const EdicionTicketDesarrollo = async(req,res=response) =>{
         campos.cusumod = usuarioToken;
         campos.dfecmod = fechaFormateada;
 
-        if(cestado ==='devuelto' || cestado ==='finalizado' ){
+        if(cestado ==='pendiente por devolver' || cestado ==='resuelto' ){
 
            campos.cestado = cestado
         }
@@ -287,7 +293,7 @@ const EdicionTicketDesarrollo = async(req,res=response) =>{
         }) 
     }
 }
-
+// 'Tickets Asignados' : muestra la lista de ticket asignado al desarrollador
 const ListaTicketDesarrollo = async (req,res=response) =>{
     const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario2);
 
@@ -295,11 +301,9 @@ const ListaTicketDesarrollo = async (req,res=response) =>{
         return res.status(200).json({
             ok:true,
             msg:'No tiene permiso para realizar la operacion',
-            metodo:'CONTROLERS/ticket.controler.js/traerListalistaAsginacion'
+            metodo:'CONTROLERS/ticket.controler.js/ListaTicketDesarrollo'
         }) 
     }
-
-
     try {
         const usuarioToken = req.uid
 
@@ -311,7 +315,10 @@ const ListaTicketDesarrollo = async (req,res=response) =>{
             .limit(5)
             .populate('cnompro','cnompro')
             .populate('cpriori','cconvar cnomvar cdesvar')
-            .populate('ctiptic','cconvar cnomvar cdesvar')      
+            .populate('ctiptic','cconvar cnomvar cdesvar')
+            .populate('cateasi','cnomusu')
+            .populate('cdesasi','cnomusu')
+                  
         ])
 
 
@@ -319,7 +326,7 @@ const ListaTicketDesarrollo = async (req,res=response) =>{
             ok:true,
             tickets,
             msg:'Se realizo la operacion con exito',
-            metodo:'CONTROLERS/ticket.controler.js/traerListalistaAsginacion'
+            metodo:'CONTROLERS/ticket.controler.js/ListaTicketDesarrollo'
         })  
 
     } catch (error) {
@@ -327,7 +334,7 @@ const ListaTicketDesarrollo = async (req,res=response) =>{
         res.status(500).json({
             ok:false,
             msg:'Se produjo un error contacte al administrador',
-            metodo:'CONTROLERS/ticket.controler.js/traerListalistaAsginacion'
+            metodo:'CONTROLERS/ticket.controler.js/ListaTicketDesarrollo'
         }) 
     }
 }
@@ -369,7 +376,6 @@ const traerProyectoCLiente =  async (req,res=response) =>{
         }) 
     }
 }
-
 const ListaDesarroladores = async (req,res=response) =>{ 
     const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario1);
 
@@ -388,9 +394,7 @@ const ListaDesarroladores = async (req,res=response) =>{
         const desde = Number(req.query.inicio)|| 0 ;// manda como ?
 
         const [desarrolladores] = await Promise.all([
-            Usuario.find({ccodcat:'DES'})    
-            .skip(desde)
-            .limit(5)      
+            Usuario.find({ccodcat:'DES'})
         ])
 
 
@@ -410,6 +414,7 @@ const ListaDesarroladores = async (req,res=response) =>{
         }) 
     }
 }
+
 const AnularTicketCliente = async (req,res=response) =>{
     const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario);
 
@@ -557,7 +562,103 @@ const Busquedapordescripcion = async (req,res=response) =>{
     }
 }
 
+const MuestraTicketGeneral = async (req,res=response) =>{
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario1);
 
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/ticket.controler.js/MuestraTicketGeneral'
+        }) 
+    }
+    try {
+        const usuarioToken = req.uid
+        const desde = Number(req.query.inicio)|| 0 ;// manda como ?
+        const [tickets,nro] = await Promise.all([
+            Tickect.find({cestado:{$nin:['registrado','anulado']}})    
+            .skip(desde)
+            .limit(5)
+            .populate('cnompro','cnompro')
+            .populate('cpriori','cconvar cnomvar cdesvar')
+            .populate('ctiptic','cconvar cnomvar cdesvar')
+            .populate('cusureg','cnomusu')
+            .populate('cateasi','cnomusu')
+            .populate('cdesasi','cnomusu'),
+            Tickect.countDocuments({cestado:{$ne:'registrado'}})      
+        ])
+        res.status(200).json({
+            ok:true,
+            data:tickets,
+            msg:'La operacion se realizo con exito',
+            total:nro,
+            metodo:'CONTROLERS/ticket.controler.js/MuestraTicketGeneral'
+        })  
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Se produjo un error contacte al administrador',
+            metodo:'CONTROLERS/ticket.controler.js/MuestraTicketGeneral'
+        }) 
+    }
+}
+
+const FinalizarTicket = async (req,res=response) =>{
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario1);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/ticket.controler.js/FinalizarTicket'
+        }) 
+    }
+
+    try {
+        const usuarioToken = req.uid
+        const uidUpdate = req.params.id;
+        
+        const fechaFormateada = currentDate+' '+currentTime
+        const validarEstadoTicket = await Tickect.findById(uidUpdate)
+        
+        const campos = {}
+
+        campos.cdesfin = req.body.cdesfin
+        campos.cestado = 'terminado'
+        campos.cusumod = usuarioToken,
+        campos.dfecmod = fechaFormateada
+
+        if(validarEstadoTicket.cestado === 'resuelto'){
+            const tickeactualizado = await Tickect.findByIdAndUpdate(uidUpdate,campos,{new:true});
+            res.status(200).json({
+            ok:true,
+            msg:'Se realizaron los cambios ',
+            tickeactualizado,
+            metodo:'CONTROLERS/ticket.controler.js/FinalizarTicket'
+        })  
+        }else{
+
+        }
+        res.status(200).json({
+            ok:false,
+            msg:'No se puede modificar ese estado ',
+            metodo:'CONTROLERS/ticket.controler.js/FinalizarTicket'
+        })  
+        
+
+        
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Se produjo un error contacte al administrador',
+            metodo:'CONTROLERS/ticket.controler.js/FinalizarTicket'
+        }) 
+    }
+}
 
 
 module.exports = {
@@ -571,5 +672,7 @@ module.exports = {
     ListaDesarroladores,
     AnularTicketCliente,
     ActualizarTicketCliente,
-    Busquedapordescripcion
+    Busquedapordescripcion,
+    MuestraTicketGeneral,
+    FinalizarTicket
 }
