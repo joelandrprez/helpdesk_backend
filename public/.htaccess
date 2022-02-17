@@ -1,0 +1,59 @@
+# If mod_rewrite is not present.
+<IfModule !mod_rewrite.c>
+  FallbackResource /index.html
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Prefix for all rewritten routes ("index.html" gets "/index.html").
+  RewriteBase /
+
+  # Redirects to HTTPS protocol (once uncommented).
+  #
+#  RewriteCond %{HTTPS} !on
+#  RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L]
+
+  # Make sure Authorization HTTP header is available.
+  RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+  # Allows access to existing files or dirs.
+  RewriteCond %{REQUEST_FILENAME} -s [OR]
+  RewriteCond %{REQUEST_FILENAME} -l [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^.*$ - [NC,L]
+
+  # Prevents treating the main-script as a route.
+  RewriteRule ^index\.html$ - [L]
+  # Redirect anything else to main-script
+  RewriteRule ^(.*) index.html [NC,L]
+</IfModule>
+
+# Enable Cross-Origin Resource Sharing (CORS)
+#
+<IfModule mod_headers.c>
+  Header merge Vary Origin
+
+  # Allows any origin (just like "*", but works in more cases)
+  SetEnvIf Origin "^(http(s)?://[^/:]*(?::\d{1,5})?)?" REQUEST_ORIGIN=$1
+  Header always append Access-Control-Allow-Origin %{REQUEST_ORIGIN}e env=REQUEST_ORIGIN
+
+  Header always set Access-Control-Allow-Credentials "true"
+  Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE"
+  Header always set Access-Control-Allow-Headers "*"
+  Header always set Access-Control-Expose-Headers "*"
+</IfModule>
+
+# Disables Browser caching for production (edit pattern as you wish).
+#
+#<FilesMatch "\.(html|htm|js|json|css)$">
+#   <IfModule mod_headers.c>
+#       FileETag None
+#       Header unset ETag
+#       Header unset Pragma
+#       Header unset Cache-Control
+#       Header unset Last-Modified
+#       Header set Pragma "no-cache"
+#       Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+#       Header set Expires "Mon, 10 Apr 1972 00:00:00 GMT"
+#   </IfModule>
+#</FilesMatch>
