@@ -24,7 +24,7 @@ app.use(cors());
 
 app.options('*',cors())
 //parse a JSON
-app.use(express.static(path.join(__dirname, 'public/index.html')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 
