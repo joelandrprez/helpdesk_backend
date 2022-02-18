@@ -26,6 +26,8 @@ app.options('*',cors())
 //parse a JSON
 
 app.use(express.json());
+
+
 //coneccion a laa base mongo
 dbConnection();
 
