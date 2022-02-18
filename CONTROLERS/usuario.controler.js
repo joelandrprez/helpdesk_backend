@@ -137,16 +137,6 @@ const actualizarUsuario = async(req,res=response) =>{
 
         const usuarioPeticio = await Usuario.findById(id_token);
         console.log(usuarioPeticio);
-        if( uid === id_token || usuarioPeticio.ccodcat === 'ADM' ){
-            
-        }
-        else{
-            return res.status(400).json({
-                ok:false,
-                msg:'no tiene permiso para realizar la operacion',
-                metodo:'CONTROLERS/usuario.controler.js/updateUsuarios'
-            })
-        }
         // FIN validacion si el usuario del token es el mismo que el que desea actualizar su perfil
 
         const { 
@@ -239,7 +229,7 @@ const listadoUsuarios = async(req,res=response) => {
         const desde = Number(req.query.inicio)|| 0 ;// manda como ?
 
         const [usuarios,total] = await Promise.all([
-            Usuario.find({},'cnomusu capeusu cdirusu ccorusu cnudoci cestusu ccodcat csexusu dfecreg')
+            Usuario.find({})
                     .skip(desde)
                     .limit(5)
                     .populate('cnudoci','cnomusu'),
@@ -304,10 +294,57 @@ const listadoClientes = async(req,res=response) => {
         }) 
     }
 }
+const BuscarUsuario = async(req,res=response) => {
+    const per = await validarPermisos(req.UsuarioToken.ccodcat,valorFormulario);
+
+    if(per===false){
+        return res.status(200).json({
+            ok:true,
+            msg:'No tiene permiso para realizar la operacion',
+            metodo:'CONTROLERS/usuario.controler.js/BuscarUsuario'
+        }) 
+    }
+
+    try {
+        const desde = Number(req.query.inicio)|| 0 ;// manda como ?
+        const termino = req.params.termino;// manda como ?
+        console.log(termino);
+        const regex = new RegExp(termino,'i');
+
+
+        const [usuarios,total] = await Promise.all([
+            Usuario.find({cnomusu:regex})
+                    .skip(desde)
+                    .limit(5)
+                    .populate('cnudoci','cnomusu'),
+            Usuario.countDocuments({cnomusu:regex})
+          
+        ])
+
+
+
+        res.status(200).json({
+            ok:true,
+            usuarios,
+            total,
+            msg:'Se realizo la operacion correctamente',
+            metodo:'CONTROLERS/usuario.controler.js/BuscarUsuario'
+        })  
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Se produjo un error contacte al administrador',
+            metodo:'CONTROLERS/usuario.controler.js/BuscarUsuario'
+        }) 
+    }
+}
 
 module.exports = {
     crearUsuario,
     actualizarUsuario,
     listadoUsuarios,
-    listadoClientes
+    listadoClientes,
+    BuscarUsuario
 }

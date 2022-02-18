@@ -10,6 +10,8 @@ const Usuario = require('../MODELS/usuario.model');
 
 const moment = require('moment');
 const { validarPermisos } = require('../HELPERS/permisos.helper');
+const { registrarNotificaciones } = require('../HELPERS/notificacion.helper');
+
 
 let currentDate = moment().format('YYYY-MM-DD')
 let currentTime = moment().format('hh:mm:ss')
@@ -53,23 +55,11 @@ const crearTicket = async(req,res=response) => {
         });
 
         const nuevoRegistro = await ticketNuevo.save();
+        //asignar datos para la notificacion
 
-        const types = [ 'ADM', 'ATE', '']
-        for (const type of types) {  
-            const notificacion = new Notificacion({
-                ctiptic:campos.ctiptic,
-                cnompro:campos.cnompro,
-                cdesasu:campos.cdesasu,
-                cdesnot:campos.cdescri,
-                cestado:'se registro correctamente el ticket',
-                ccatego:`${type}`,
-                cusureg:usuarioToken,
-                dfecreg:fechaFormateada,
-                cusumod:usuarioToken,
-                dfecmod:fechaFormateada
-            })
-            await notificacion.save();
-        }
+        registrarNotificaciones('registro',nuevoRegistro)
+        //FIN asignar datos para la notificacion
+
 
 
 
@@ -170,7 +160,11 @@ const AsignacionTicketAtencionCliente = async(req,res=response) =>{
         }
 
         const tickeactualizado = await Tickect.findByIdAndUpdate(uidUpdate,campos,{new:true});
+        //asignar datos para la notificacion
+        registrarNotificaciones('asignar',tickeactualizado)
+        //fin asignar datos para la notificacion
 
+        
         res.status(200).json({
             ok:true,
             msg:'Se realizaron los cambios ',
@@ -276,6 +270,12 @@ const EdicionTicketDesarrollo = async(req,res=response) =>{
             })  
         }
         const tickeactualizado = await Tickect.findByIdAndUpdate(uidUpdate,campos,{new:true});
+
+        //asignar datos para la notificacion
+        registrarNotificaciones(tickeactualizado.cestado,tickeactualizado)
+        //FIN asignar datos para la notificacion
+
+
 
         res.status(200).json({
             ok:true,
@@ -394,7 +394,7 @@ const ListaDesarroladores = async (req,res=response) =>{
         const desde = Number(req.query.inicio)|| 0 ;// manda como ?
 
         const [desarrolladores] = await Promise.all([
-            Usuario.find({ccodcat:'DES'})
+            Usuario.find({ccodcat:'DESARROLLADOR'})
         ])
 
 
@@ -583,7 +583,7 @@ const MuestraTicketGeneral = async (req,res=response) =>{
             .populate('cpriori','cconvar cnomvar cdesvar')
             .populate('ctiptic','cconvar cnomvar cdesvar')
             .populate('cusureg','cnomusu')
-            .populate('cateasi','cnomusu')
+            .populate('cateasi','cnomusu ccodcat')
             .populate('cdesasi','cnomusu'),
             Tickect.countDocuments({cestado:{$ne:'registrado'}})      
         ])
@@ -626,26 +626,37 @@ const FinalizarTicket = async (req,res=response) =>{
         const campos = {}
 
         campos.cdesfin = req.body.cdesfin
-        campos.cestado = 'terminado'
+        campos.cestado = req.body.cestado
+        campos.cateasi = usuarioToken
         campos.cusumod = usuarioToken,
         campos.dfecmod = fechaFormateada
-
-        if(validarEstadoTicket.cestado === 'resuelto'){
-            const tickeactualizado = await Tickect.findByIdAndUpdate(uidUpdate,campos,{new:true});
-            res.status(200).json({
-            ok:true,
-            msg:'Se realizaron los cambios ',
-            tickeactualizado,
-            metodo:'CONTROLERS/ticket.controler.js/FinalizarTicket'
-        })  
+        console.log(campos);
+        if(campos.cestado === 'terminado' || campos.cestado ==='devuelto'){
+            if(validarEstadoTicket.cestado === 'resuelto'|| validarEstadoTicket.cestado === 'registrado' || validarEstadoTicket.cestado ==='pendiente por devolver' ){
+                const tickeactualizado = await Tickect.findByIdAndUpdate(uidUpdate,campos,{new:true});
+                console.log(campos);
+                //asignar datos para la notificacion
+                registrarNotificaciones(tickeactualizado.cestado,tickeactualizado)
+                //FIN asignar datos para la notificacion
+                res.status(200).json({
+                ok:true,
+                msg:'Se realizaron los cambios ',
+                tickeactualizado,
+                metodo:'CONTROLERS/ticket.controler.js/FinalizarTicket'
+                })
+                  
+                }
         }else{
-
+            res.status(200).json({
+                ok:false,
+                msg:'No se puede modificar ese estado ',
+                metodo:'CONTROLERS/ticket.controler.js/FinalizarTicket'
+            })  
         }
-        res.status(200).json({
-            ok:false,
-            msg:'No se puede modificar ese estado ',
-            metodo:'CONTROLERS/ticket.controler.js/FinalizarTicket'
-        })  
+
+
+
+        
         
 
         

@@ -19,6 +19,10 @@ const permisosSchema = Schema({
     csection:{
         type:String,
         require:true
+    },
+    cnomper:{
+        type:String,
+        require:true
     }
 
 

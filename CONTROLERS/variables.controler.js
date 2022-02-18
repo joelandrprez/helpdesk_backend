@@ -30,16 +30,6 @@ const crearVariable = async(req,res=response) => {
 
     try {
 
-        const usuario = await Usuario.findById(req.uid)
-        if(usuario.ccodcat !== 'ADM'){
-            res.status(400).json({
-                ok:true,
-                msg:'NO TIENE LOS PERMISOS PARA REALIZARLO',
-                metodo:'CONTROLERS/variables.controler.js/crearVariable'
-            })  
-        }     
-               
-
         const usuarioToken = req.uid
 
         const { ...campos} = req.body;
@@ -153,13 +143,9 @@ const traerListaVariables = async(req,res=response) => {
         const fecha_registro = currentDate+' '+currentTime
 
         const usuario = await Usuario.findById(req.uid)
-        if(usuario.ccodcat !== 'ADM'){
-            res.status(400).json({
-                ok:true,
-                msg:'NO TIENE LOS PERMISOS PARA REALIZARLO',
-                metodo:'CONTROLERS/variables.controler.js/traerListaVariables'
-            })  
-        }      
+       
+
+          
         const uidToken = req.uid;
 
         const desde = Number(req.query.inicio)|| 0 ;// manda como ?

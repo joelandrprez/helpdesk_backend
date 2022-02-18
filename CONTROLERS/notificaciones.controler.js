@@ -9,7 +9,7 @@ let currentDate = moment().format('YYYY-MM-DD')
     
 let currentTime = moment().format('hh:mm:ss')
 
-let valorFormulario = 'historial de notificaciones'
+let valorFormulario = 'Notificaciones'
 
 const listaSolicitudesporUsuario = async(req,res=response) => {
 
@@ -19,24 +19,20 @@ const listaSolicitudesporUsuario = async(req,res=response) => {
         return res.status(200).json({
             ok:true,
             msg:'No tiene permiso para realizar la operacion',
-            metodo:'CONTROLERS/usuario.controler.js/crearVariable'
+            metodo:'CONTROLERS/usuario.controler.js/listaSolicitudesporUsuario'
         }) 
     }
-
     try {
         const desde = Number(req.query.inicio)|| 0 ;// manda como ?
-
+        const usuarioToken = req.uid
         const [notificaciones,total] = await Promise.all([
-            Notificaciones.find({},'')
+            Notificaciones.find({cusunot:usuarioToken},'')
                     .skip(desde)
-                    .limit(5),
-                    
-            Notificaciones.countDocuments()
+                    .limit(5)
+                    .sort({dfecmod:-1}),
+            Notificaciones.countDocuments({cusunot:usuarioToken})
           
         ])
-
-
-
         res.status(200).json({
             ok:true,
             notificaciones,

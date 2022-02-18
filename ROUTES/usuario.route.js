@@ -9,7 +9,8 @@ const { Router } = require('express');
 const { actualizarUsuario,
     crearUsuario, 
     listadoUsuarios,
-    listadoClientes} = require('../CONTROLERS/usuario.controler');
+    listadoClientes,
+    BuscarUsuario} = require('../CONTROLERS/usuario.controler');
 
 const { ValidarJWT } = require('../MIDDLEWARES/validar-jwt.middleware');
 
@@ -32,6 +33,10 @@ router.get('/', [
 router.get('/clientes', [
     ValidarJWT
 ], listadoClientes);
+
+router.get('/clientes/:termino', [
+    ValidarJWT
+], BuscarUsuario);
 
 
 module.exports = router

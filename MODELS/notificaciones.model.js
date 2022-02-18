@@ -1,33 +1,14 @@
 const {Schema,model, now} = require('mongoose');
 
 const NotificacionSchema = Schema({
-    ctiptic:{
-        type:String,
-        require:true,
-    },
-    cnompro:{
+    cusunot:{
         type:Schema.Types.ObjectId,
         ref:'systpro'
     },
-    cdesasu:{
-        type:String,
-        require:true
+    cmsgnot:{
+        type: String
     },
-    cdesnot:{
-        type:String,
-    }, 
-    cestado:{
-        type:String,
-    }, 
-    ccatego:{
-        type:String,
-        default:''
-    }, 
-    cusureg:{
-        type:Schema.Types.ObjectId,
-        ref:'systusu'
-    },
-    dfecreg:{
+    cnomtic:{
         type: String
     },
     cusumod:{
